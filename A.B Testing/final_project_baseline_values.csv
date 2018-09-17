@@ -1,0 +1,8 @@
+Evaluation_metric,Baseline_value
+Unique cookies to view course overview page per day:,40000
+"Unique cookies to click ""Start free trial"" per day:",3200
+Enrollments per day:,660
+"Click-through-probability on ""Start free trial"":",0.08
+Gross conversion,0.20625
+Retention,0.53
+Net Conversion,0.1093125
