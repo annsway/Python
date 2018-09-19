@@ -1,0 +1,1270 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{A.B Testing Project - Free Trial Screener}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{A/B Testing Project: Free Trial
+Screener}\label{ab-testing-project-free-trial-screener}
+
+    This work was based on the final project from the A/B Testing course
+that I took at Udacity in September 2018.
+
+    \section{Part I: Experiment Overview}\label{part-i-experiment-overview}
+
+    In the experiment, Udacity wanted to test a change at its website where
+if a student clicked "Start free trial" button after viewing a course
+overview page, she would be asked how much time she had available to
+devote to that course. This screenshot shows what the message looked
+like.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{scipy} \PY{k}{as} \PY{n+nn}{scipy}
+        \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{free trial screener.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}2}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    If the student indicated 5 or more hours per week, then she would be
+taken through the checkout process as usual. After 14 days, she will
+automatically be charged unless she cancels first. If she indicated
+fewer than 5 hours per week, a message would appear suggesting the
+student access the course materials for free.
+
+The hypothesis was that this free trial screener might set clearer
+expectations for students upfront, thus \emph{reducing} the number of
+frustrated students who left the free trial because they didn't have
+enough time.
+
+A detailed project overview can be found at:
+\href{https://docs.google.com/document/u/1/d/1aCquhIqsUApgsxQ8-SQBAigFDcfWVVohLEXcV6jWbdI/pub?embedded=True}{Final
+Project Instructions}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{flowchart1.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}3}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \subsection{Part II: Experiment Design}\label{part-ii-experiment-design}
+
+\subsubsection{Metric Choice}\label{metric-choice}
+
+\paragraph{1. Unit of Diversion}\label{unit-of-diversion}
+
+The unit of diversion is a \textbf{cookie}, but as soon as a student
+enrolls in the free trial, he or she will be tracked by user-id moving
+forward.
+
+\paragraph{2. Unit of Analysis}\label{unit-of-analysis}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Import data frame for baseline values }
+        \PY{n}{baseline} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{final\PYZus{}project\PYZus{}baseline\PYZus{}values.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{baseline}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}                                    Evaluation\_metric  Baseline\_value
+        0  Unique cookies to view course overview page pe{\ldots}    40000.000000
+        1  Unique cookies to click "Start free trial" per{\ldots}     3200.000000
+        2                               Enrollments per day:      660.000000
+        3   Click-through-probability on "Start free trial":        0.080000
+        4                                   Gross conversion        0.206250
+        5                                          Retention        0.530000
+        6                                     Net Conversion        0.109313
+\end{Verbatim}
+            
+    The unit of anlysis is the denominator of a metric, and thus every
+metric has its own unit of analysis as below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{flowchart.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}5}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \paragraph{3. Invariant Metrics}\label{invariant-metrics}
+
+An invariant metric is used in the sanity check during A/B Testing,
+which should stay consistent before and after the experiment.
+
+In this project, since the experimental message would not show up until
+a student press the "Start free trial" button, any metric collected
+before the enrollment step would not be affected by the experiment. As a
+result, I chose \textbf{number of cookies}, \textbf{number of clicks},
+and \textbf{click-through probability} to be the invariant metrics.
+
+\paragraph{4. Evaluation Metrics}\label{evaluation-metrics}
+
+An evaluation metric is used to measure the business impact of an
+experiment.
+
+Looking at the definitions of the given metrics, the \textbf{Gross
+Conversion} rate would give us an idea on the percentage of students who
+eventually enrolled in the free trial after seeing the pop-up
+experimental message. We would expect to see a \emph{negative} change in
+this metric in the experiment, indicating the message reduced the
+frustrated students.
+
+The \textbf{Retention} rate would be a good evaluation metric as well,
+because it reflects the percentage of students who made at least one
+payment after the enrollment which would be affected by the experimental
+message. I would expect a \emph{positive} change in this metric assuming
+students enrolled have been aware of the time that should be committed
+to the courses.
+
+Last but not least, the \textbf{Net Conversion} rate should also be
+included, as it shows us the percentage of students who made at least
+one payment out of the total number of cookies to click the "Start free
+trial" where students would see the experimental message. As with the
+Gross Conversion rate, I would expect to see a negative change in this
+metric.
+
+    \subsubsection{Measuring Standard
+Deviation}\label{measuring-standard-deviation}
+
+For each evaluation metric, we are asked to calculate the
+\textbf{analytic estimate} standard deviation, given a sample of 5000
+cookies visiting the course overview page and the
+\href{https://docs.google.com/spreadsheets/d/1MYNUtC47Pg8hdoCjOXaHqF-thheGpUshrFA21BAJnNc/edit\#gid=0}{baseline
+values}. It should be noted that we are in fact measuring the standard
+error of sample mean.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Number of Cookies}
+        \PY{n}{baseline\PYZus{}cookies} \PY{o}{=} \PY{n}{baseline}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Number of Free Trial Cookies}
+        \PY{n}{baseline\PYZus{}free\PYZus{}trial\PYZus{}cookies} \PY{o}{=} \PY{n}{baseline}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Click\PYZhy{}through Probability}
+        \PY{n}{CTP} \PY{o}{=} \PY{n}{baseline}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Gross Conversion}
+        \PY{n}{baseline\PYZus{}gc} \PY{o}{=} \PY{n}{baseline}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Retetion }
+        \PY{n}{baseline\PYZus{}rt} \PY{o}{=} \PY{n}{baseline}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Net Conversion}
+        \PY{n}{baseline\PYZus{}nc} \PY{o}{=} \PY{n}{baseline}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Sample Size }
+        \PY{n}{sample\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{5000}
+\end{Verbatim}
+
+
+    Calculate the value of unit of analysis for each metric based on the
+given sample size:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Number of free trial cookies}
+        \PY{n}{free\PYZus{}trial\PYZus{}cookies} \PY{o}{=} \PY{n}{sample\PYZus{}size}\PY{o}{*}\PY{n}{CTP}
+        \PY{n}{free\PYZus{}trial\PYZus{}cookies}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 400.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Number of enrolled user\PYZhy{}ids}
+        \PY{n}{enrolled\PYZus{}user\PYZus{}ids} \PY{o}{=} \PY{n}{free\PYZus{}trial\PYZus{}cookies}\PY{o}{*}\PY{n}{baseline\PYZus{}gc}
+        \PY{n}{enrolled\PYZus{}user\PYZus{}ids}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 82.5
+\end{Verbatim}
+            
+    Assuming that the data are independent and identically distributed
+(i.i.d.) and there are only two outcomes for every event, we can
+conclude the data follow a \emph{Bernoulli} distribution. The analytic
+standard error can be calculated using the following formula:
+
+\[ {s}_\bar{x} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} se for Gross Conversion }
+        \PY{n}{se\PYZus{}hat\PYZus{}gc} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{baseline\PYZus{}gc}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{baseline\PYZus{}gc}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{free\PYZus{}trial\PYZus{}cookies}\PY{p}{)}\PY{p}{)}
+        \PY{n}{se\PYZus{}hat\PYZus{}gc}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} 0.020230604137049392
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} se for Retention}
+         \PY{n}{se\PYZus{}hat\PYZus{}rt} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{baseline\PYZus{}rt}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{baseline\PYZus{}rt}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{enrolled\PYZus{}user\PYZus{}ids}\PY{p}{)}\PY{p}{)}
+         \PY{n}{se\PYZus{}hat\PYZus{}rt}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 0.05494901217850908
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} se for Net Conversion }
+         \PY{n}{se\PYZus{}hat\PYZus{}nc} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{baseline\PYZus{}nc}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{baseline\PYZus{}nc}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{free\PYZus{}trial\PYZus{}cookies}\PY{p}{)}\PY{p}{)}
+         \PY{n}{se\PYZus{}hat\PYZus{}nc}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 0.01560154458248846
+\end{Verbatim}
+            
+    \subsubsection{Sizing}\label{sizing}
+
+\paragraph{1. Number of Samples vs.
+Power}\label{number-of-samples-vs.-power}
+
+Before we start, we need to decide whether or not to use the
+\emph{Bonferroni Correction}, which is used to counteract the problem of
+multiple comparisons.
+
+I calculated the probability of getting at least one false positive
+result:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mf}{0.95}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} 0.1426250000000001
+\end{Verbatim}
+            
+    Whiile 14.3\% for Type I error may not be too bad, it is in fact an
+overestimate because the three metrics are \emph{not independent} at
+all. Plus, the Bonferroni Correction is a very conservative method. So,
+I decided not to pursue this approach, but to use alpha directly. From
+this formula:
+
+\[ d_{min} = z_{1-\frac{\alpha}{2}}\cdot \sqrt{\frac{p_1 (1-p_1)}{n}} + z_{1-\beta}\cdot \sqrt{\frac{p_2 (1-p_2)}{n}}\]
+
+We can obtain the sample size formula:
+
+\[ n = (\frac{z_{1-\frac{\alpha}{2}}\cdot \sqrt{p_1 (1-p_1)} + z_{\beta}\cdot \sqrt{p_2 (1-p_2)}}{d_{min}})^2 \]
+
+Reference:
+\href{http://www.alfredo.motta.name/ab-testing-from-scratch/\#easy-footnote-bottom-22-982}{A/B
+Testing, from scrath}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{sample\PYZus{}size\PYZus{}calculator} \PY{p}{(}\PY{n}{alpha}\PY{p}{,} \PY{n}{beta}\PY{p}{,} \PY{n}{p}\PY{p}{,} \PY{n}{delta}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} p is the baseline conversion rate}
+             \PY{c+c1}{\PYZsh{} delta, or dmin, is the practical significance level }
+             
+             \PY{k}{if} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.5}\PY{p}{:}
+                 \PY{n}{p2} \PY{o}{=} \PY{n}{p} \PY{o}{\PYZhy{}} \PY{n}{delta}
+             \PY{k}{else}\PY{p}{:} 
+                 \PY{n}{p2} \PY{o}{=} \PY{n}{p} \PY{o}{+} \PY{n}{delta}
+             
+             \PY{n}{t\PYZus{}alpha2} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{isf}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{alpha}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             
+             \PY{n}{t\PYZus{}beta} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{isf}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{beta}\PY{p}{)}
+         
+             \PY{n}{sd1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{p} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{p}\PY{p}{)} \PY{o}{+} \PY{n}{p}  \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{p} \PY{p}{)}\PY{p}{)}
+             \PY{n}{sd2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{p} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{p}\PY{p}{)} \PY{o}{+} \PY{n}{p2} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{p2}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{p}{(}\PY{n}{t\PYZus{}alpha2} \PY{o}{*} \PY{n}{sd1} \PY{o}{+} \PY{n}{t\PYZus{}beta} \PY{o}{*} \PY{n}{sd2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{n}{delta}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    It should be noted that the sample size caclulator only produces the
+sample size for one group of an experiment, so we need to double it in
+order to get the size for both control and treatment groups.
+
+More importantly, it is based on the unit of analysis of each metric,
+which means we need to work restrospectively by applying the reciprocals
+of the rate(s) to the results so as to get the page views required.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Number of Page View Required for Gross Conversion }
+         \PY{n}{num\PYZus{}free\PYZus{}trial\PYZus{}per\PYZus{}group} \PY{o}{=} \PY{n}{sample\PYZus{}size\PYZus{}calculator}\PY{p}{(}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{baseline\PYZus{}gc}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{)}
+         \PY{n}{ss\PYZus{}gc} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{num\PYZus{}free\PYZus{}trial\PYZus{}per\PYZus{}group}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{n}{CTP}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ss\PYZus{}gc}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 645875
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Number of Page View Required for Retention }
+         \PY{n}{num\PYZus{}enrolled\PYZus{}user\PYZus{}ids\PYZus{}per\PYZus{}group} \PY{o}{=} \PY{n}{sample\PYZus{}size\PYZus{}calculator}\PY{p}{(}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{baseline\PYZus{}rt}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{)}
+         \PY{n}{ss\PYZus{}rt} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{num\PYZus{}enrolled\PYZus{}user\PYZus{}ids\PYZus{}per\PYZus{}group}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{n}{baseline\PYZus{}gc}\PY{o}{/}\PY{n}{CTP}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ss\PYZus{}rt}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} 4741212
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Number of Page View Required for Net Conversion }
+         \PY{n}{num\PYZus{}free\PYZus{}trial\PYZus{}per\PYZus{}group2} \PY{o}{=} \PY{n}{sample\PYZus{}size\PYZus{}calculator}\PY{p}{(}\PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{baseline\PYZus{}nc}\PY{p}{,} \PY{l+m+mf}{0.0075}\PY{p}{)}
+         \PY{n}{ss\PYZus{}nc} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{num\PYZus{}free\PYZus{}trial\PYZus{}per\PYZus{}group2}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{n}{CTP}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ss\PYZus{}nc}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} 685325
+\end{Verbatim}
+            
+    At this point, I would choose \textbf{4741212} to be the total number of
+page views required, because it is the greatest number and thus cover
+the sample size needed for all of the evaluation metrics.
+
+\paragraph{2. Duration vs. Exposure}\label{duration-vs.-exposure}
+
+Given the total page views calculated above, I would choose to divert
+50\% of it to this experiment in order to reduce the impact of the
+experiment on the daily website operations. The number of days needed
+for this experiment would be:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{ss\PYZus{}rt}\PY{o}{/}\PY{p}{(}\PY{n}{baseline\PYZus{}cookies}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} 237.0606
+\end{Verbatim}
+            
+    Unfortunately, 238 days would be too long to take for one experiment. So
+I decided to drop \textbf{Retention} metric, and choose \textbf{685325}
+as the number of page views required as it is the second largest number
+which will cover the sample size required for \textbf{Gross Conversion}
+and \textbf{Net Conversion}. With that, the length of experiment becomes
+35 days:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{ss\PYZus{}nc}\PY{o}{/}\PY{p}{(}\PY{n}{baseline\PYZus{}cookies}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} 34.26625
+\end{Verbatim}
+            
+    \subsection{Part III: Experiment
+Analysis}\label{part-iii-experiment-analysis}
+
+\subsubsection{Sanity Check}\label{sanity-check}
+
+Before we run an A/B test, it is important to perform sanity checks to
+make sure the control and experiment groups are comparable. Basically,
+the \textbf{invariant metrics} we chose in Part II sould stay consistent
+in the two groups.
+
+\emph{The data collected can be found at}
+\href{https://docs.google.com/spreadsheets/d/1Mu5u9GrybDdska-ljPXyBjTpdZIUev_6i7t4LRDfXM8/edit\#gid=0}{Final
+Projecct Results}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} Import the data collected }
+         \PY{c+c1}{\PYZsh{} Note that I combined the control and experiment data and denoted them using the **Group** variable for the sake of the analysis. }
+         \PY{c+c1}{\PYZsh{} Group == 0: data from the control group; Group == 1: data from the experiment group}
+         
+         \PY{n}{dat} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{final\PYZus{}project\PYZus{}results.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{dat}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:}           Date  Pageviews  Clicks  Enrollments  Payments  Group
+         0  Sat, Oct 11       7723     687        134.0      70.0      0
+         1  Sun, Oct 12       9102     779        147.0      70.0      0
+         2  Mon, Oct 13      10511     909        167.0      95.0      0
+         3  Tue, Oct 14       9871     836        156.0     105.0      0
+         4  Wed, Oct 15      10014     837        163.0      64.0      0
+\end{Verbatim}
+            
+    To begin with, I would like to check the \textbf{robustness} of the
+invariant metrics by looking their distribution histogram.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{} Number of pagesviews }
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{dat}\PY{o}{.}\PY{n}{Pageviews}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of the Page Views}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Page Views}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vertical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Sanity Check for Page Views}
+         
+         \PY{c+c1}{\PYZsh{} Observed: Ncont / Ntotal}
+         \PY{n}{phat\PYZus{}views} \PY{o}{=} \PY{n}{dat}\PY{p}{[}\PY{n}{dat}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pageviews}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{dat}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pageviews}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Calculate the expected CIs based on CLT and the expected center 0.5}
+         \PY{c+c1}{\PYZsh{} SE based on the expected center of CI 0.5}
+         \PY{n}{p\PYZus{}views} \PY{o}{=} \PY{l+m+mf}{0.5}
+         \PY{n}{se\PYZus{}views} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{p\PYZus{}views}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{p\PYZus{}views}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{dat}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pageviews}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} CI}
+         \PY{n}{CI\PYZus{}lower\PYZus{}views} \PY{o}{=} \PY{n}{p\PYZus{}views} \PY{o}{\PYZhy{}} \PY{n}{se\PYZus{}views}\PY{o}{*}\PY{l+m+mf}{1.96}
+         \PY{n}{CI\PYZus{}upper\PYZus{}views} \PY{o}{=} \PY{n}{p\PYZus{}views} \PY{o}{+} \PY{n}{se\PYZus{}views}\PY{o}{*}\PY{l+m+mf}{1.96}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{CI\PYZus{}lower\PYZus{}views}\PY{p}{,} \PY{n}{CI\PYZus{}upper\PYZus{}views}\PY{p}{,} \PY{n}{CI\PYZus{}lower\PYZus{}views} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.5} \PY{o+ow}{and} \PY{n}{CI\PYZus{}upper\PYZus{}views} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.49882039214902313 0.5011796078509769 True
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{c+c1}{\PYZsh{} Number of cookies  }
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{dat}\PY{o}{.}\PY{n}{Clicks}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plum}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of the Unique Cookies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Unique Cookies}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vertical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Sanity Check for Clicks}
+         
+         \PY{c+c1}{\PYZsh{} Ncont / Ntotal}
+         \PY{n}{phat\PYZus{}clicks} \PY{o}{=} \PY{n}{dat}\PY{p}{[}\PY{n}{dat}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clicks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{dat}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clicks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} SE based on the expected center of CI 0.5}
+         \PY{n}{se\PYZus{}clicks} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{o}{/}\PY{p}{(}\PY{n}{dat}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clicks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} CI}
+         \PY{n}{CI\PYZus{}lower\PYZus{}clicks} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{\PYZhy{}} \PY{n}{se\PYZus{}clicks}\PY{o}{*}\PY{l+m+mf}{1.96}
+         \PY{n}{CI\PYZus{}upper\PYZus{}clicks} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{+} \PY{n}{se\PYZus{}clicks}\PY{o}{*}\PY{l+m+mf}{1.96}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{CI\PYZus{}lower\PYZus{}clicks}\PY{p}{,} \PY{n}{CI\PYZus{}upper\PYZus{}clicks}\PY{p}{,} \PY{n}{CI\PYZus{}lower\PYZus{}clicks} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.5} \PY{o+ow}{and} \PY{n}{CI\PYZus{}upper\PYZus{}clicks} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.49588449572378945 0.5041155042762105 True
+
+    \end{Verbatim}
+
+    As shown above, the distribution for the invariant metrics
+\textbf{number of cookies} and the \textbf{number of page views} seem to
+be normal, so we can assume the metrics follow the \emph{Bernoulli}
+distribution. Since the observed metrics are both included in the
+expected confidence intervals with the center of \textbf{0.5}, in other
+words, there is no significant difference in the two metrics in the
+control and experiment groups.
+
+Reference:
+\href{https://classroom.udacity.com/courses/ud257/lessons/4085798776/concepts/40713087720923}{Checking
+Invariants Part 2}.
+
+    \paragraph{Sanity check for CTP}\label{sanity-check-for-ctp}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c+c1}{\PYZsh{} CTP }
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{dat}\PY{o}{.}\PY{n}{Clicks}\PY{o}{/}\PY{n}{dat}\PY{o}{.}\PY{n}{Pageviews}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of the Click\PYZhy{}through Probability}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Click\PYZhy{}through Probability}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vertical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The distribution for \textbf{CTP} appears to have two modes. So I
+decided to perform a bootstrapping test, and calculate the empirical
+confidence interval based on the differences in CTP between the control
+and experiment groups.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{} Boostrap relicate function }
+         
+         \PY{k}{def} \PY{n+nf}{bootstrap\PYZus{}relicate\PYZus{}1d}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{func}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Generate bootstrap replicate of 1 dimensional data}
+             \PY{n}{bs\PYZus{}sample} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} bootstrap relicate, size = n}
+             \PY{k}{return} \PY{n}{func}\PY{p}{(}\PY{n}{bs\PYZus{}sample}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{cont\PYZus{}ctp} \PY{o}{=} \PY{n}{dat}\PY{p}{[}\PY{n}{dat}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clicks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{dat}\PY{p}{[}\PY{n}{dat}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pageviews}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{exp\PYZus{}ctp}  \PY{o}{=} \PY{n}{dat}\PY{p}{[}\PY{n}{dat}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clicks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{dat}\PY{p}{[}\PY{n}{dat}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pageviews}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{v0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{cont\PYZus{}ctp}\PY{p}{,} \PY{n}{exp\PYZus{}ctp}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} create an array }
+         \PY{n}{d0} \PY{o}{=} \PY{n}{v0}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{v0}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Bootstrap replicates }
+         \PY{n}{bs\PYZus{}replicates0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+             \PY{n}{bs\PYZus{}replicates0}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{bootstrap\PYZus{}relicate\PYZus{}1d}\PY{p}{(}\PY{n}{d0}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{)}
+         
+         \PY{n}{conf\PYZus{}int0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{percentile}\PY{p}{(}\PY{n}{bs\PYZus{}replicates0}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{2.5}\PY{p}{,} \PY{l+m+mf}{97.5}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{bci\PYZus{}lower0} \PY{o}{=} \PY{n}{conf\PYZus{}int0}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{bci\PYZus{}upper0} \PY{o}{=} \PY{n}{conf\PYZus{}int0}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{bci\PYZus{}lower0}\PY{p}{,} \PY{n}{bci\PYZus{}upper0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-0.0005388856497911426 0.0006215252480994556
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} Plot a histogram of bootstrap replicates}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bs\PYZus{}replicates0}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{normed} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Difference in CTP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vertical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Resampling for CTP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{lu0} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{bci\PYZus{}lower0}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CI lower bound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ll0} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{bci\PYZus{}upper0}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CI upper bound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ll0}\PY{o}{.}\PY{n}{set\PYZus{}dashes}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{ls0} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Statistical significance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Ann\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As shown on the graph above, if we repeat the experiment over and over
+again, the data CTP become normally distributed. Since 0 is captured in
+the 95\% confidence interval from the bootstrapping test, we can
+conclude that there is no significant difference between the control and
+experiment groups with respect to this invariant metric.
+
+In summary, all three invariant metrics passed the sanity check. It is
+safe for us to continue our analysis.
+
+    \subsubsection{Result Analysis}\label{result-analysis}
+
+\paragraph{1. Effect Size Tests}\label{effect-size-tests}
+
+For the evaluation metrics, \textbf{Gross Conversion} rate and
+\textbf{Net Conversion} rate, I am going to first of all calculate their
+analytic confidence intervals assuming they both come from the
+\emph{bernoulli} distribution. Second, I will reconstruct their
+confidence intervals using bootstrpping if their distributions look
+lopsided based on the data collected.
+
+Again, the data are available at:
+\href{https://docs.google.com/spreadsheets/d/1Mu5u9GrybDdska-ljPXyBjTpdZIUev_6i7t4LRDfXM8/edit\#gid=0}{Final
+Project Results}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{c+c1}{\PYZsh{} Analytic confidence interval}
+         
+         \PY{k}{def} \PY{n+nf}{check\PYZus{}sig} \PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{n1}\PY{p}{,} \PY{n}{n2}\PY{p}{,} \PY{n}{alpha}\PY{p}{,} \PY{n}{dmin}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{p1} \PY{o}{=} \PY{n}{x1}\PY{o}{/}\PY{n}{n1}
+             \PY{n}{p2} \PY{o}{=} \PY{n}{x2}\PY{o}{/}\PY{n}{n2}
+             
+             \PY{c+c1}{\PYZsh{}p\PYZus{}pool = (x1 + x2)/(n1 + n2)}
+             \PY{c+c1}{\PYZsh{}se\PYZus{}pool = np.sqrt(p\PYZus{}pool*(1\PYZhy{}p\PYZus{}pool)*(1/n1 + 1/n2))}
+             
+             \PY{n}{t\PYZus{}alpha2} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{isf}\PY{p}{(}\PY{n}{alpha}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{d} \PY{o}{=} \PY{n}{p2} \PY{o}{\PYZhy{}} \PY{n}{p1}
+             \PY{n}{se\PYZus{}pool} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{p1}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{p1}\PY{p}{)}\PY{o}{/}\PY{n}{n1} \PY{o}{+} \PY{n}{p2}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{p2}\PY{p}{)}\PY{o}{/}\PY{n}{n2}\PY{p}{)}
+             
+             \PY{n}{CI\PYZus{}lower} \PY{o}{=} \PY{n+nb}{round}\PY{p}{(}\PY{n}{d} \PY{o}{\PYZhy{}} \PY{n}{se\PYZus{}pool}\PY{o}{*}\PY{n}{t\PYZus{}alpha2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+             \PY{n}{CI\PYZus{}upper} \PY{o}{=} \PY{n+nb}{round}\PY{p}{(}\PY{n}{d} \PY{o}{+} \PY{n}{se\PYZus{}pool}\PY{o}{*}\PY{n}{t\PYZus{}alpha2}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Calculate p\PYZhy{}value}
+             \PY{n}{t} \PY{o}{=} \PY{n}{d}\PY{o}{/}\PY{n}{se\PYZus{}pool}
+             \PY{n}{df} \PY{o}{=} \PY{n}{n1}\PY{o}{+}\PY{n}{n2}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}
+             \PY{n}{pval} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{t}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{n}{t}\PY{p}{,} \PY{n}{df}\PY{o}{=}\PY{n}{df}\PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{CI\PYZus{}lower} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{CI\PYZus{}upper} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 
+                 \PY{n}{statistical\PYZus{}sig} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N}\PY{l+s+s1}{\PYZsq{}}
+         
+             \PY{k}{else}\PY{p}{:} 
+                 \PY{n}{statistical\PYZus{}sig} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}
+         
+         
+             \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{alpha}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ CI lower bound: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{CI\PYZus{}lower}\PY{p}{,} 
+                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{alpha}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{ CI upper bound: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{CI\PYZus{}upper}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{ p\PYZhy{}value: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{pval}\PY{p}{,} 
+                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{ Statistical significance: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{statistical\PYZus{}sig}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\tightlist
+\item
+  Hypothesis for \textbf{Gross Conversion}:
+\end{enumerate}
+
+\[H_0: p_1 = p_2\] \[H_a: p_1 \neq p_2\]
+
+It should be noted the practical difference is 0.01, which means there
+should be at least 1\% change in Gross Conversion rate to launch the
+change.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{c+c1}{\PYZsh{} Drop null values from the dataset}
+         \PY{n}{df} \PY{o}{=} \PY{n}{dat}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Effect Size Test for Gross Conversion }
+         
+         \PY{n}{Xcont\PYZus{}enroll} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Enrollments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{Xexp\PYZus{}enroll}  \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Enrollments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{Ncont\PYZus{}clicks} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clicks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{Nexp\PYZus{}clicks}  \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clicks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{check\PYZus{}sig}\PY{p}{(}\PY{n}{Xcont\PYZus{}enroll}\PY{p}{,} \PY{n}{Xexp\PYZus{}enroll}\PY{p}{,} \PY{n}{Ncont\PYZus{}clicks}\PY{p}{,} \PY{n}{Nexp\PYZus{}clicks}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.01}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+ 95.0 \% CI lower bound:  -0.0291 
+ 95.0 \% CI upper bound:  -0.012 
+ p-value:  1.28364660850983e-06 
+ Statistical significance:  Y
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{c+c1}{\PYZsh{} Gross Conversion }
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Enrollments}\PY{o}{/}\PY{n}{df}\PY{o}{.}\PY{n}{Clicks}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of the Gross Conversion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gross Conversion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vertical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The distribution for \textbf{Gross Conversion} is right skewed. So I am
+going to resample the data collected and double check the result.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{c+c1}{\PYZsh{} Bootstrapping for Gross Conversion }
+         
+         \PY{n}{cont\PYZus{}gc} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Enrollments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clicks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{exp\PYZus{}gc}  \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Enrollments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clicks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{v} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{cont\PYZus{}gc}\PY{p}{,} \PY{n}{exp\PYZus{}gc}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} create an array }
+         \PY{n}{d} \PY{o}{=} \PY{n}{v}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{v}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Bootstrap replicates }
+         \PY{n}{bs\PYZus{}replicates} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+             \PY{n}{bs\PYZus{}replicates}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{bootstrap\PYZus{}relicate\PYZus{}1d}\PY{p}{(}\PY{n}{d}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{)}
+         
+         \PY{n}{conf\PYZus{}int} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{percentile}\PY{p}{(}\PY{n}{bs\PYZus{}replicates}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{2.5}\PY{p}{,} \PY{l+m+mf}{97.5}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{bci\PYZus{}lower} \PY{o}{=} \PY{n}{conf\PYZus{}int}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{bci\PYZus{}upper} \PY{o}{=} \PY{n}{conf\PYZus{}int}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{bci\PYZus{}lower}\PY{p}{,} \PY{n}{bci\PYZus{}upper}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-0.031228552655890928 -0.009841840072193152
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{c+c1}{\PYZsh{} Plot a histogram of bootstrap replicates}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bs\PYZus{}replicates}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{normed} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Difference in Gross Conversion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PDF}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vertical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Resampling for Gross Conversion Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{lu} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{bci\PYZus{}lower}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CI lower bound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ll} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{bci\PYZus{}upper}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CI upper bound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ll}\PY{o}{.}\PY{n}{set\PYZus{}dashes}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{ls} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Statistical significance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Ann\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_56_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It appears that the empirical bootstrapping test agrees with the result
+from the analytic variation where both confidence interval does
+\emph{not} include 0, there is siginifcant statistical difference in
+\textbf{Gross Conversion} rate between the control and experiment
+groups. To be concrete, the gross conversion rate is significantly
+\textbf{lower in the experiment group} than that of the control group.
+
+    \begin{enumerate}
+\def\labelenumi{(\arabic{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Hypothesis for \textbf{Net Conversion}:
+\end{enumerate}
+
+\[H_0: p_1 = p_2\] \[H_a: p_1 \neq p_2\]
+
+It should be noted the practical difference is 0.0075, which means there
+should be at least 0.75\% change in Gross Conversion rate to launch the
+change.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{c+c1}{\PYZsh{} Effect Size Test for Net Conversion }
+         
+         \PY{n}{Xcont\PYZus{}pay} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Payments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{Xexp\PYZus{}pay}  \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Payments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{check\PYZus{}sig}\PY{p}{(}\PY{n}{Xcont\PYZus{}pay}\PY{p}{,} \PY{n}{Xexp\PYZus{}pay}\PY{p}{,} \PY{n}{Ncont\PYZus{}clicks}\PY{p}{,} \PY{n}{Nexp\PYZus{}clicks}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{,} \PY{l+m+mf}{0.0075}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+ 95.0 \% CI lower bound:  -0.0116 
+ 95.0 \% CI upper bound:  0.0019 
+ p-value:  0.07791518688005435 
+ Statistical significance:  N
+
+    \end{Verbatim}
+
+    The \emph{analytic confidence interval} tells us there is no significant
+difference between the two groups as 0 is not included in the interval.
+The p-value agrees with the CI as it is greater than 0.05 significance
+level.
+
+Let's take a look at the histogram of the data collected in this
+experiment.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{c+c1}{\PYZsh{} Plot the distribution of net conversion }
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Payments}\PY{o}{/}\PY{n}{df}\PY{o}{.}\PY{n}{Clicks}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salmon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of Net Conversion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Net Conversion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vertical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The distribution for Net Conversion rate seems to be normal, yet I am
+still going to resample the data collected to see if the result is
+robust.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{cont\PYZus{}nc} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Payments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clicks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{exp\PYZus{}nc}  \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Payments}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Group}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Clicks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{v2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{(}\PY{n}{cont\PYZus{}nc}\PY{p}{,} \PY{n}{exp\PYZus{}nc}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} create an array }
+         \PY{n}{d2} \PY{o}{=} \PY{n}{v2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{v2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Bootstrap replicates }
+         \PY{n}{bs\PYZus{}replicates2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+             \PY{n}{bs\PYZus{}replicates2}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{bootstrap\PYZus{}relicate\PYZus{}1d}\PY{p}{(}\PY{n}{d2}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{)}
+         
+         \PY{n}{conf\PYZus{}int2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{percentile}\PY{p}{(}\PY{n}{bs\PYZus{}replicates2}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{2.5}\PY{p}{,} \PY{l+m+mf}{97.5}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{bci\PYZus{}lower2} \PY{o}{=} \PY{n}{conf\PYZus{}int2}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{bci\PYZus{}upper2} \PY{o}{=} \PY{n}{conf\PYZus{}int2}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{bci\PYZus{}lower2}\PY{p}{,} \PY{n}{bci\PYZus{}upper2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-0.017929545153322353 0.008215699337871026
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} Plot a histogram of bootstrap replicates}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{bs\PYZus{}replicates2}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{normed} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{salmon}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Difference in Gross Conversion}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Frequency}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vertical}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Resampling for Net Conversion Rate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{lu2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{bci\PYZus{}lower2}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CI lower bound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ll2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{bci\PYZus{}upper2}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CI upper bound}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ll2}\PY{o}{.}\PY{n}{set\PYZus{}dashes}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{ls2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Statistical significance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Ann\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}axes\textbackslash{}\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As shown above, even if we resampled the data, there still is no
+significant statistical difference in \textbf{Net Conversion} between
+the control and experiment groups, since 0 is within the reconstructed
+confidence interval.
+
+    \paragraph{2. Sign Tests}\label{sign-tests}
+
+Sign test is used to test for consistent differences between pairs of
+observations. In our experiment, we can assume that the probablity of
+getting a postive difference is 0.5. The null hypothesis is: there is no
+difference among the signs of two groups.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} Count if difference is positive }
+         \PY{n}{ct\PYZus{}gc} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{l+m+mi}{1} \PY{k}{if} \PY{n}{x} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{k}{else} \PY{l+m+mi}{0} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{d}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Sign test for Gross Conversion }
+         \PY{n}{scipy}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{binom\PYZus{}test}\PY{p}{(}\PY{n}{ct\PYZus{}gc}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{d}\PY{p}{)}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two\PYZhy{}sided}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} 0.0025994777679443364
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} Count if difference is positive}
+         \PY{n}{ct\PYZus{}nc} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{l+m+mi}{1} \PY{k}{if} \PY{n}{x} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{k}{else} \PY{l+m+mi}{0} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{d2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Sign test for Net Conversion }
+         \PY{n}{scipy}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{binom\PYZus{}test}\PY{p}{(}\PY{n}{ct\PYZus{}nc}\PY{p}{,} \PY{n}{n}\PY{o}{=}\PY{n+nb}{len}\PY{p}{(}\PY{n}{d2}\PY{p}{)}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{alternative}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two\PYZhy{}sided}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} 0.6776394844055175
+\end{Verbatim}
+            
+    The p-value for \textbf{Gross Conversion} appears to be less than 0.05,
+which means there was a significant difference between the control and
+experiment groups in this metric. On the contrary, the p-value for
+\emph{Net Conversion} is greater than 0.05, so it is not statistically
+significant.
+
+\paragraph{3. Summary}\label{summary}
+
+In summary, I did not use Bonferroni Correction and the reasons are
+stated in the \emph{Sizing} section. There is no conflict between the
+effect size tests and the sign tests for the evaluation metrics.
+
+    \subsubsection{Recommendation}\label{recommendation}
+
+To conclude, I would recommend launch the free trial screener, as the
+experiment has passed sanity checks, and the evaluation metric
+\textbf{Gross Conversion} rate has set up clearer expectations for
+students and \emph{decreased} the percentage of frustrated students
+enrolled in the courses as expected.
+
+    \subsection{Part IV: Follow-Up
+Experiment}\label{part-iv-follow-up-experiment}
+
+In this experiment, I ended up using only \textbf{Gross Conversion} rate
+as the evaluation metric. Since it showed a significant result, I would
+suggest perform a retrospective analysis on \textbf{Gross Conversion}
+and see how it improves along the way.
+
+If time allowed, I would suggest run the experiment for a few more weeks
+to see if there is any learning effect on the \textbf{Net Conversion}
+rate. I would also consider breaking down the data, such as by platform
+and by day of week, to see if there is \emph{Simpson's Paradox} or
+system setup issues that we missed at the data collection stage.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
