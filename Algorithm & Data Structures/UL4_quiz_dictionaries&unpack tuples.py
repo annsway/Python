@@ -15,10 +15,14 @@ Atlanta (USA, North America)
 Cairo (Egypt, Africa)
 Shanghai (China, Asia)"""
 
-locations = {'North America': {'USA': ['Mountain View']}
-           , 'Asia': {'India': ['Bangalore'], 'China': ['Shanghai']}
-           , 'Africa': {'Egypt': ['Cairo']}
-}
+# Note: cities are in a list
+locations = {'North America': {'USA': ['Mountain View']}}
+locations['Asia'] = {'India': ['Bangalore']}
+locations['North America']['USA'].append('Atlanta') ############
+locations['Africa'] = {'Egypt': 'Cairo'}
+locations['Asia']['China'] = ['Shanghai'] ###########
+
+#print(locations['Asia'])
 
 """Print the following (using "print").
 1. A list of all cities in the USA in
@@ -34,22 +38,17 @@ American City
 Asian City - Country
 Asian City - Country"""
 
-locations = {'North America': {'USA': ['Mountain View']}}
-locations['North America']['USA'].append('Atlanta')
-locations['Asia'] = {'India': ['Bangalore']}
-locations['Asia']['China'] = ['Shanghai']
-locations['Africa'] = {'Egypt': ['Cairo']}
-
 print 1
-usa_sorted = sorted(locations['North America']['USA'])
-for city in usa_sorted:
+for city in sorted(locations['North America']['USA']):
     print city
-
+    
 print 2
-asia_cities = []
-for countries, cities in locations['Asia'].iteritems():
-    city_country = cities[0] + " - " + countries 
-    asia_cities.append(city_country)
-#asia_sorted = sorted(asia_cities)
-for city in asia_cities:
+lst_asian_cities = []
+
+# Unpack tuple 
+for country, city in locations['Asia'].iteritems(): 
+    city_country = city[0] + " - " + country 
+    lst_asian_cities.append(city_country)
+
+for city in sorted(lst_asian_cities):
     print city
